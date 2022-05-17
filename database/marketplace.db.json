@@ -1,0 +1,88 @@
+{
+    "users": {
+        "b4da16a1-b23f-42c8-aff0-371539fe1553": {
+            "name": "John Doe",
+            "email": "john_doe@gmail.com",
+            "register_date": "2022-04-13 20:44"
+        },
+        "71f69f29-5404-4f45-9ed5-efe5b0618439": {
+            "name": "Anca",
+            "email": "ancuta_05@yahoo.com",
+            "register_date": "2022-04-13 21:00"
+        },
+        "769232f9-7838-4301-a7d0-a54b1eb3a238": {
+            "name": "Florina",
+            "email": "florina_cira@gmail.com",
+            "register_date": "2022-05-03 21:31"
+        },
+        "d3d76911-190a-42a5-9124-6c69509d2fa8": {
+            "name": "Bogdan",
+            "email": "bogdan26@yahoo.com",
+            "register_date": "2022-05-17 20:36"
+        }
+    },
+    "products": {
+        "2dd36a4f-9b7c-4f1f-a33b-ff44a6230645": {
+            "product_name": "Laptop",
+            "category": "Laptopuri & IT",
+            "price": "6100"
+        },
+        "f3a14171-5790-4f02-92d7-ec5470f7e34c": {
+            "product_name": "Televizor LG",
+            "category": "Televizoare & Accesorii",
+            "price": "1700"
+        },
+        "20e6755e-4e13-46cf-bcb0-a52cfc73c77e": {
+            "product_name": "Televizor Samsung",
+            "category": "Televizoare & Accesorii",
+            "price": "2100"
+        },
+        "553ac852-398d-4669-b91e-5279b13f3ddd": {
+            "product_name": "Imprimanta laser monocrom Xerox",
+            "category": "Laptopuri & IT",
+            "price": "409"
+        },
+        "08678c95-1ed4-4065-928d-1fec9dc86696": {
+            "product_name": "Telefon mobil Huawei P50 Pro",
+            "category": "Telefoane & Accesorii",
+            "price": "4.599"
+        }
+    },
+    "orders": {
+        "417f7f02-10fd-40e7-820b-5088f20b540d": {
+            "user_id": "b4da16a1-b23f-42c8-aff0-371539fe1553",
+            "product_id": "2dd36a4f-9b7c-4f1f-a33b-ff44a6230645",
+            "register_date": "2022-04-13 20:46"
+        },
+        "ebfb5aef-5d79-4da6-a521-954c5a7090e8": {
+            "user_id": "71f69f29-5404-4f45-9ed5-efe5b0618439",
+            "product_id": "c7f63b43-d09e-443c-8520-af8af71c2fca",
+            "register_date": "2022-05-08 22:37"
+        },
+        "7c7ca163-76c9-4fd5-b0d5-7fb8df96c26c": {
+            "user_id": "71f69f29-5404-4f45-9ed5-efe5b0618439",
+            "product_id": "2dd36a4f-9b7c-4f1f-a33b-ff44a6230645",
+            "register_date": "2022-05-08 22:55"
+        },
+        "9b3a3998-e652-4b06-8fc6-1bd79d9b02df": {
+            "user_id": "769232f9-7838-4301-a7d0-a54b1eb3a238",
+            "product_id": "c7f63b43-d09e-443c-8520-af8af71c2fca",
+            "register_date": "2022-05-08 22:56"
+        },
+        "d0953c8f-ef7b-4974-acfa-aabbcbd8975d": {
+            "user_id": "b4da16a1-b23f-42c8-aff0-371539fe1553",
+            "product_id": "c7f63b43-d09e-443c-8520-af8af71c2fca",
+            "register_date": "2022-05-12 16:48"
+        },
+        "9a3b59ed-00f5-423b-8383-760993e6a67d": {
+            "user_id": "71f69f29-5404-4f45-9ed5-efe5b0618439",
+            "product_id": "08678c95-1ed4-4065-928d-1fec9dc86696",
+            "register_date": "2022-05-12 16:59"
+        },
+        "bd0d9379-c683-416c-a6db-1cbb20b5596b": {
+            "user_id": "d3d76911-190a-42a5-9124-6c69509d2fa8",
+            "product_id": "08678c95-1ed4-4065-928d-1fec9dc86696",
+            "register_date": "2022-05-17 21:02"
+        }
+    }
+}
