@@ -25,27 +25,37 @@
         "2dd36a4f-9b7c-4f1f-a33b-ff44a6230645": {
             "product_name": "Laptop",
             "category": "Laptopuri & IT",
-            "price": "6100"
+            "price": 6100
         },
         "f3a14171-5790-4f02-92d7-ec5470f7e34c": {
             "product_name": "Televizor LG",
             "category": "Televizoare & Accesorii",
-            "price": "1700"
+            "price": 1700
         },
         "20e6755e-4e13-46cf-bcb0-a52cfc73c77e": {
             "product_name": "Televizor Samsung",
             "category": "Televizoare & Accesorii",
-            "price": "2100"
+            "price": 2100
         },
         "553ac852-398d-4669-b91e-5279b13f3ddd": {
             "product_name": "Imprimanta laser monocrom Xerox",
             "category": "Laptopuri & IT",
-            "price": "409"
+            "price": 409
         },
         "08678c95-1ed4-4065-928d-1fec9dc86696": {
             "product_name": "Telefon mobil Huawei P50 Pro",
             "category": "Telefoane & Accesorii",
-            "price": "4.599"
+            "price": 4.599
+        },
+        "1649f832-bd13-4c08-8d7a-f0530dcb58f1": {
+            "product_name": "telefon",
+            "category": "Telefoane & Accesorii",
+            "price": 3000
+        },
+        "f4b9bc76-7e52-41cd-a939-6230be1d1885": {
+            "product_name": "Iphone",
+            "category": "Telefoane & Accesorii",
+            "price": 5860
         }
     },
     "orders": {

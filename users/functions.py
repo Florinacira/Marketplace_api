@@ -5,25 +5,28 @@ from uuid import uuid4
 from database.functions import read_database, write_database
 from flask import Response
 
+
+def is_valid_email(email):
+    """Returns whether an email address string is valid or not.
+        :param email: email address str
+        :return: tuple of form (True/False, message) if valid/not valid with message explaining the error
+    """
+    special_characters = "!#$%^&*()|\\{}[]'\":;/><,`~"
+
+    if email.count('@') != 1:
+        return False, "Email address should contain exactly one @ symbol!"
+    if email.count('.') < 1:
+        return False, "Email address should contain at least one . symbol!"
+    if email.lower() != email:
+        return False, "Email address should contain only lowercase letters!"
+    if any(c in email for c in special_characters):
+        return False, f"Email address should not contain any of the following special_characters: {special_characters}"
+    return True, ''
+
+
 def create_user():
-    def is_valid_email(email):
-        """Returns whether an email address string is valid or not.
-            :param email: email address str
-            :return: tuple of form (True/False, message) if valid/not valid with message explaining the error
-        """
-        special_characters = "!#$%^&*()|\\{}[]'\":;/><,`~"
 
-        if email.count('@') != 1:
-            return False, "Email address should contain exactly one @ symbol!"
-        if email.count('.') < 1:
-            return False,  "Email address should contain at least one . symbol!"
-        if email.lower() != email:
-            return False, "Email address should contain only lowercase letters!"
-        if any(c in email for c in special_characters):
-            return False, f"Email address should not contain any of the following special_characters: {special_characters}"
-        return True, ''
-
-    print('Creaing a user...')
+    print('Creating a user...')
     data = read_database()
     print(data)
 
@@ -64,17 +67,16 @@ def delete_user():
 
 
 def list_user():
+    data = read_database()
+    users = data.get('users')
 
-   data = read_database()
-   users = data.get('users')
+    input_email = input('Please input email of users you want to display: ')
 
-   input_email = input('Please input email of users you want to display: ')
-
-   for user_id, user in users.items():
-       if user['email'] == input_email:
-           pprint.pprint(user)
-           break
-   else:
+    for user_id, user in users.items():
+        if user['email'] == input_email:
+            pprint.pprint(user)
+            break
+    else:
         print(f"No user with email {input_email} has been found in DB!")
 
 
@@ -107,16 +109,17 @@ def update_user():
     write_database(data)
 
 
-
 ## WEB APIs
+
 
 def create_user_flask(name, email):
     data = read_database()
-
+    if not is_valid_email(email):
+        return 400, 'Validation error...'
+    
     users = data.get('users')
     user_id = str(uuid4())
     register_date = datetime.now().strftime('%Y-%m-%d %H:%M')
-
 
     users[user_id] = {
         'name': name,
@@ -156,13 +159,14 @@ def list_users_flask():
     else:
         return 400, 'No users in DB'
 
+
 def update_user_flask(user_id, user_data):
     data = read_database()
     users = data.get('users')
     if user_id in users:
-       data['users'][user_id].update(user_data)
-       write_database(data)
-       return 200, f'user with id: {user_id} has been successfully updated'
+        data['users'][user_id].update(user_data)
+        write_database(data)
+        return 200, f'user with id: {user_id} has been successfully updated'
     else:
         return 404, f'user with id: {user_id} not found'
 

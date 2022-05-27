@@ -3,6 +3,7 @@ from uuid import uuid4
 import pprint
 from flask import Response
 
+
 def create_product():
     print('Creating a product...')
     data = read_database()
@@ -13,7 +14,7 @@ def create_product():
     category = input('Input the category of the product: ')
     price = input('Input the price: ')
 
-    data['products'][product_id]= {
+    data['products'][product_id] = {
         "product_name": product_name,
         "category": category,
         "price": price
@@ -46,16 +47,16 @@ def list_products():
 
 
 def list_product():
-   data = read_database()
-   products = data.get('products')
+    data = read_database()
+    products = data.get('products')
 
-   input_product = input('Please input the product you want to display: ')
+    input_product = input('Please input the product you want to display: ')
 
-   for product_id, product in products.items():
-       if product['product_name'] == input_product:
-           pprint.pprint(product)
-           break
-   else:
+    for product_id, product in products.items():
+        if product['product_name'] == input_product:
+            pprint.pprint(product)
+            break
+    else:
         print(f'No product with name {input_product} has been found in DB!')
 
 
@@ -79,7 +80,8 @@ def update_product():
 
     write_database(data)
 
-## WEB APIs
+#WEB APIs
+
 
 def create_product_flask(product_name, category, price):
     data = read_database()
@@ -91,8 +93,13 @@ def create_product_flask(product_name, category, price):
         'category': category,
         'price': price
     }
-    write_database(data)
-    return 201, f"Product with id = {product_id} has been created!"
+
+    if price == int(price):
+        write_database(data)
+        return 201, f"Product with id = {product_id} has been created!"
+    else:
+        return 400, 'You did not input a valid price'
+
 
 def delete_product_flask(product_id):
     data = read_database()
@@ -105,6 +112,7 @@ def delete_product_flask(product_id):
     else:
         return Response(status=404, response=f'Product with id{product_id} not found')
 
+
 def get_product_flask(product_id):
     data = read_database()
     products = data.get('products', {})
@@ -113,6 +121,7 @@ def get_product_flask(product_id):
     else:
         return 404, f'Product with id {product_id} not found'
 
+
 def list_products_flask():
     data = read_database()
     products = data.get('products')
@@ -120,6 +129,7 @@ def list_products_flask():
         return 200, products
     else:
         return 400, 'No products in DB'
+
 
 def update_product_flask(product_id, product_data):
     data = read_database()

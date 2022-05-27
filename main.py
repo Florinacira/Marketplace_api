@@ -2,11 +2,14 @@ from users.functions import *
 from products.functions import *
 from orders.functions import *
 
+
 def print_menu_options():
     print(f'Available options: {list(menu_options.keys())} ')
 
+
 def exit_message():
     print('Have a nice day!')
+
 
 menu_options = {
     'create_user': create_user,
@@ -28,6 +31,7 @@ menu_options = {
     'exit': exit_message
 }
 
+
 def main():
     option = ''
     while option != "exit":
@@ -38,6 +42,7 @@ def main():
         else:
             print("You did not input a valid option")
             print_menu_options()
+
 
 if __name__ == '__main__':
     main()

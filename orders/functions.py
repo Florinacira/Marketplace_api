@@ -5,19 +5,18 @@ from uuid import uuid4
 from datetime import datetime
 from flask import Response
 
+
 def create_order():
     print('Creating a order...')
     data = read_database()
     print(data)
     order_id = str(uuid4())
-
+    user_id, product_id = None, None
     user_email = input('Input your email: ')
     for userid, user in data['users'].items():
         if user['email'] == user_email:
             user_id = userid
             break
-    else:
-        print('Input a valid email: ')
 
     order = input('Input the product you want to order: ')
     for productid, product in data['products'].items():
@@ -25,16 +24,22 @@ def create_order():
             product_id = productid
             break
     else:
-         print('The product is not in stock')
+        print('The product is not in stock')
 
-    register_date = datetime.now().strftime('%Y-%m-%d %H:%M')
-    data['orders'][order_id] = {
-        'user_id': user_id,
-        'product_id': product_id,
-        'register_date': register_date
-    }
-    write_database(data)
-    print('Done creating order...')
+    if user_id is not None and product_id is not None:
+
+        register_date = datetime.now().strftime('%Y-%m-%d %H:%M')
+        data['orders'][order_id] = {
+            'user_id': user_id,
+            'product_id': product_id,
+            'register_date': register_date
+            }
+
+        write_database(data)
+        print('Done creating order...')
+    else:
+        print('Invalid user or product')
+
 
 def delete_order():
     data = read_database()
@@ -50,13 +55,15 @@ def delete_order():
         write_database(data)
         print(data)
 
+
 def list_orders():
     data = read_database()
     orders = data.get('orders')
     if orders:
-       pprint.pprint(orders)
+        pprint.pprint(orders)
     else:
-       print('No orders in DB')
+        print('No orders in DB')
+
 
 def list_order():
     data = read_database()
@@ -67,10 +74,10 @@ def list_order():
     input_order_id = input('Please input id of order you want to display: ')
     for order_id, order in orders.items():
         if order_id == input_order_id:
-           pprint.pprint(order)
-           break
+            pprint.pprint(order)
+            break
     else:
-             print(f"No order with id {input_order_id} has been found in DB!")
+        print(f"No order with id {input_order_id} has been found in DB!")
 
 
 def update_order():
@@ -83,42 +90,47 @@ def update_order():
     updated_product_of_order = input('Please input updated product id of the order: ')
     for order_id, order in orders.items():
         if order_id == input_order:
-           order['product_id'] = updated_product_of_order if updated_product_of_order else order['product_id']
-           break
+            order['product_id'] = updated_product_of_order if updated_product_of_order else order['product_id']
+            break
     else:
-         print(f'No order with id {input_order} has been found!')
+        print(f'No order with id {input_order} has been found!')
 
     write_database(data)
 
 ## WEB APIs
+
 
 def add_order_flask(email, product_name):
     data = read_database()
     orders = data.get('orders')
     order_id = str(uuid4())
     register_date = datetime.now().strftime('%Y-%m-%d %H:%M')
+    user_id, product_id = None, None
 
     for userid, user in data['users'].items():
         if user['email'] == email:
             user_id = userid
             break
-    else:
-        print('Input a valid email: ')
 
     for productid, product in data['products'].items():
         if product['product_name'] == product_name:
             product_id = productid
             break
     else:
-         print('The product is not in stock')
+        print('The product is not in stock')
 
-    orders[order_id] = {
-        'user_id': user_id,
-        'product_id': product_id,
-        'register_date': register_date
-    }
-    write_database(data)
-    return 201, f"Order with id = {order_id} has been created"
+    if user_id is not None and product_id is not None:
+
+        orders[order_id] = {
+            'user_id': user_id,
+            'product_id': product_id,
+            'register_date': register_date
+        }
+        write_database(data)
+        return 201, f"Order with id = {order_id} has been created"
+    else:
+        print('Invalid user or product')
+
 
 def delete_order_flask(order_id):
     data = read_database()
@@ -130,6 +142,7 @@ def delete_order_flask(order_id):
     else:
         return Response(status=404, response=f'Order with id:{order_id} not found')
 
+
 def get_order_flask(order_id):
     data = read_database()
     orders = data.get('orders', {})
@@ -138,6 +151,7 @@ def get_order_flask(order_id):
     else:
         return 404, f'Order with id {order_id} not found'
 
+
 def list_orders_flask():
     data = read_database()
     orders = data.get('orders')
@@ -145,6 +159,7 @@ def list_orders_flask():
         return 200, orders
     else:
         return 400, 'No orders in DB'
+
 
 def update_order_flask(order_id, order_data):
     data = read_database()
