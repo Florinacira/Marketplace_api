@@ -25,4 +25,4 @@ class UsersSQLDBModel(Base, SQLAlchemySerializer):
         self.register_date = fields.get('register_date')
 
     def __repr__(self):
-        return f"<User> name:{self.name}; email:{self.email}; register_date: {self.register_date}"
+        return f'<User> name:{self.name}; email:{self.email}; register_date: {self.register_date}'
